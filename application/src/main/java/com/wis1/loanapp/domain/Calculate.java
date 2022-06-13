@@ -20,9 +20,10 @@ public class Calculate {
     private Long id;
 
     @Column
-    private Integer totalCostLoan;
+    private Integer amountLoan;
 
     @Column
-    private Integer installments;
+    private Integer loanLength;
+
 
 }

@@ -15,11 +15,6 @@ public class ClientController {
 
     }
 
-    @GetMapping
-    public void getWhatLoanWant(){
-
-    }
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addClient(){
 

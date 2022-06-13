@@ -2,6 +2,7 @@ package com.wis1.loanapp.service;
 
 import com.wis1.loanapp.domain.Calculate;
 import com.wis1.loanapp.domain.Client;
+import com.wis1.loanapp.exception.CalculateNotFoundException;
 import com.wis1.loanapp.repository.CalculateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,11 @@ import java.util.List;
 public class CalculateDbService {
 
     private final CalculateRepository calculateRepository;
+
+    public Calculate getCalculateById(final Long id) throws CalculateNotFoundException {
+        return calculateRepository.findById(id).orElseThrow(CalculateNotFoundException::new);
+    }
+
 
     public List<Calculate> getAllCalculateByClient(final Client client) {
 

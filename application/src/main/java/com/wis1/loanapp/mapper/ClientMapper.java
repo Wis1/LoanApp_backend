@@ -14,24 +14,24 @@ public class ClientMapper {
     public Client mapToClient(final ClientDto clientDto) {
         return new Client(
                 clientDto.getId(),
-                clientDto.getAmountLoan(),
-                clientDto.getAmountLoan()
+                clientDto.getFirstName(),
+                clientDto.getLastName()
         );
     }
 
     public ClientDto mapToClientDto(final Optional<Client> client){
         return new ClientDto(
                 client.get().getId(),
-                client.get().getAmountLoan(),
-                client.get().getLoanLength()
+                client.get().getFirstName(),
+                client.get().getLastName()
         );
     }
 
     public ClientDto mapToClientDto(final Client client){
         return new ClientDto(
                 client.getId(),
-                client.getAmountLoan(),
-                client.getLoanLength()
+                client.getFirstName(),
+                client.getLastName()
         );
     }
 

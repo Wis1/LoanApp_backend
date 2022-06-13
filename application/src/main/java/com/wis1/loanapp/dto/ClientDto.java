@@ -8,6 +8,6 @@ import lombok.Getter;
 public class ClientDto {
 
     private Long id;
-    private Integer amountLoan;
-    private Integer loanLength;
+    private String firstName;
+    private String lastName;
 }

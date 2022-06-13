@@ -20,9 +20,11 @@ public class Client {
     private Long id;
 
     @Column
-    private Integer amountLoan;
+    private String firstName;
 
     @Column
-    private Integer loanLength;
+    private String lastName;
+
+
 
 }

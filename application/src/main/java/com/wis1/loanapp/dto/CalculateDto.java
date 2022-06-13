@@ -8,7 +8,7 @@ import lombok.Getter;
 public class CalculateDto {
 
     private Long id;
-    private Integer totalCostLoan;
-    private Integer installments;
+    private Integer amountLoan;
+    private Integer loanLenght;
 
 }
