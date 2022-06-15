@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "client")
 @Getter
@@ -25,6 +24,17 @@ public class Client {
     @Column
     private String lastName;
 
+    @OneToMany(
+            targetEntity = Calculate.class,
+            mappedBy = "client",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Calculate> calculateList= new ArrayList<>();
 
-
+    public Client(Long id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }

@@ -1,14 +1,16 @@
 package com.wis1.loanapp.calc.client;
 
-import com.wis1.loanapp.dto.CalcResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
-import java.util.Optional;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 @Component
 @RequiredArgsConstructor
@@ -19,20 +21,20 @@ public class CalcClient {
     @Value("${calc.api.endpoint.prod}")
     private String calApiEndpoint;
 
-    public Optional<CalcResultDto> getCalcResult() {
-        URI url= UriComponentsBuilder.fromHttpUrl(calApiEndpoint)
-                .queryParam("amount", 1000 )
-                .queryParam("installments", 24)
-                .queryParam("interest_rate", 8)
-                .queryParam("diminishing", false)
-                .queryParam("X-RapidAPI-Key", "c1f33630aamshd9c68a8ef87c1f5p188968jsn86ae09702ab9")
-                .queryParam("X-RapidAPI-Host", "loan-generator1.p.rapidapi.com")
-                .build().encode().toUri();
+    public String getCalcResult(Integer amount, Integer installments) throws IOException, InterruptedException {
 
-        CalcResultDto calcResult= restTemplate.getForObject(url,CalcResultDto.class);
-
-        return Optional.ofNullable(calcResult);
-
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(UriComponentsBuilder.fromHttpUrl(calApiEndpoint)
+                        .queryParam("amount", amount)
+                        .queryParam("installments", installments)
+                        .queryParam("interest_rate", 8)
+                        .queryParam("diminishing", false).build().encode().toString()))
+                .header("X-RapidAPI-Key", "a5031c4912mshe2b2222390a030ap13bb3cjsn29ea85b82148")
+                .header("X-RapidAPI-Host", "loan-generator1.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
 
     }
 }

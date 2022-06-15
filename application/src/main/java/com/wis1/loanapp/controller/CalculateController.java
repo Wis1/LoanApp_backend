@@ -8,6 +8,7 @@ import com.wis1.loanapp.mapper.CalculateMapper;
 import com.wis1.loanapp.service.CalculateDbService;
 import com.wis1.loanapp.service.ClientDbService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,9 +36,13 @@ public class CalculateController {
 
     }
 
-    @PostMapping
-    public void addNewCalculate(@PathVariable Integer amountLoan, @PathVariable Integer numberOfMonths){
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "{clientId}")
+    public void addNewCalculate(@RequestBody CalculateDto calculateDto, @PathVariable Long clientId) throws ClientNotFoundException {
 
+
+        Calculate calculate=calculateMapper.mapToCalculate(calculateDto);
+        calculate.setClient(clientDbService.getClientWithId(clientId));
+        calculateDbService.saveCalculate(calculate);
     }
 
 
