@@ -19,6 +19,9 @@ public class CalculateDbService {
         return calculateRepository.findById(id).orElseThrow(CalculateNotFoundException::new);
     }
 
+    public List<Calculate> getAllCalculate(){
+        return calculateRepository.findAll();
+    }
 
     public List<Calculate> getAllCalculateByClient(final Client client) {
 

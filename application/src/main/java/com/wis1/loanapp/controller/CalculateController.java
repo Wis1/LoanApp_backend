@@ -23,6 +23,12 @@ public class CalculateController {
     private final CalculateMapper calculateMapper;
     private final ClientDbService clientDbService;
 
+    @GetMapping()
+    public ResponseEntity<List<CalculateDto>> getCalculate() {
+        List<Calculate> calculateList= calculateDbService.getAllCalculate();
+        return ResponseEntity.ok(calculateMapper.mapToCalculateDtoList(calculateList));
+    }
+
     @GetMapping(value = "{id}")
     public ResponseEntity<List<CalculateDto>>  getCalculateLoan(@PathVariable Long id) throws ClientNotFoundException {
         Client client= clientDbService.getClientWithId(id);

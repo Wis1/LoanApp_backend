@@ -11,5 +11,6 @@ import java.util.List;
 public interface CalculateRepository extends CrudRepository<Calculate, Long> {
 
     List<Calculate> findByClient(Client client);
+    List<Calculate> findAll();
 
 }

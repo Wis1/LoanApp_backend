@@ -3,10 +3,7 @@ package com.wis1.loanapp.controller;
 import com.wis1.loanapp.calc.client.NbpClient;
 import com.wis1.loanapp.dto.ExchangeRateDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -17,20 +14,26 @@ public class NBPController {
 
     private final NbpClient nbpClient;
 
-    @GetMapping("/dollars")
-    public void getDollarsRate(){
-        ExchangeRateDto exchangeRateDto=nbpClient.getExchangeRateOf();
+    @GetMapping("{usd}")
+    public void getDollarsRate(@PathVariable String usd){
+        ExchangeRateDto exchangeRateDto=nbpClient.getExchangeRateOf(usd);
         System.out.println(exchangeRateDto.getRatesMid());
     }
 
 
-    @GetMapping("/euro")
-    public void getEuroRate(){
+    @GetMapping("{eur}")
+    public void getEuroRate(@PathVariable String eur){
+
+        ExchangeRateDto exchangeRateDto=nbpClient.getExchangeRateOf(eur);
+        System.out.println(exchangeRateDto);
 
     }
 
-    @GetMapping("/frank")
-    public void getFrankRate(){
+    @GetMapping("{chf}")
+    public void getFrankRate(@PathVariable String chf ){
+
+        ExchangeRateDto exchangeRateDto= nbpClient.getExchangeRateOf(chf);
+        System.out.println(exchangeRateDto);
 
     }
 

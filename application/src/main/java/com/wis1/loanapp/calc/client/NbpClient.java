@@ -17,10 +17,12 @@ public class NbpClient {
     @Value("${nbp.api.endpoint.prod}")
     private String nbpEndpoint;
 
-    public ExchangeRateDto getExchangeRateOf() {
+    public ExchangeRateDto getExchangeRateOf(String currency) {
 
         URI url= UriComponentsBuilder.fromHttpUrl(nbpEndpoint)
-                .path("/c/eur/2022-06-15")
+                .path("/c/")
+                .path(currency)
+                .path("/last")
                 .build().encode().toUri();
         ExchangeRateDto response= restTemplate.getForObject(url, ExchangeRateDto.class);
 
