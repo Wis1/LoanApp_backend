@@ -47,5 +47,11 @@ public class CalculateController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping(path = "{calculateId}")
+    public ResponseEntity<Void> deleteCalculate(@PathVariable Long calculateId) {
+        calculateDbService.deleteCalculate(calculateId);
+        return ResponseEntity.ok().build();
+    }
+
 
 }

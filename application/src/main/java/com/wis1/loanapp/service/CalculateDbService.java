@@ -5,6 +5,7 @@ import com.wis1.loanapp.domain.Client;
 import com.wis1.loanapp.exception.CalculateNotFoundException;
 import com.wis1.loanapp.repository.CalculateRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CalculateDbService {
+
 
     private final CalculateRepository calculateRepository;
 
