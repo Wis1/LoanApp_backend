@@ -1,5 +1,7 @@
 package com.wis1.loanapp.calc.client;
 
+import com.google.gson.Gson;
+import com.wis1.loanapp.dto.CalcResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,7 +23,7 @@ public class CalcClient {
     @Value("${calc.api.endpoint.prod}")
     private String calApiEndpoint;
 
-    public String getCalcResult(Integer amount, Integer installments) throws IOException, InterruptedException {
+    public CalcResultDto getCalcResult(Integer amount, Integer installments) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(UriComponentsBuilder.fromHttpUrl(calApiEndpoint)
@@ -34,7 +36,9 @@ public class CalcClient {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        return response.body();
+        Gson gson= new Gson();
+        CalcResultDto calcResultDto= gson.fromJson(response.body(), CalcResultDto.class);
+        return calcResultDto;
 
     }
 }

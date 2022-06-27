@@ -10,6 +10,6 @@ public class CalculateDto {
 
     private Long id;
     private Integer amountLoan;
-    private Integer loanLenght;
+    private Integer loanLength;
 
 }

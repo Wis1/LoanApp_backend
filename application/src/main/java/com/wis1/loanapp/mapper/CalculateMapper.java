@@ -14,7 +14,7 @@ public class CalculateMapper {
         return new Calculate(
                 calculateDto.getId(),
                 calculateDto.getAmountLoan(),
-                calculateDto.getLoanLenght()
+                calculateDto.getLoanLength()
         );
     }
 

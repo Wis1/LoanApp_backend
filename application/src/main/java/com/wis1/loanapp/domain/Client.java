@@ -37,4 +37,8 @@ public class Client {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+    public Client(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
