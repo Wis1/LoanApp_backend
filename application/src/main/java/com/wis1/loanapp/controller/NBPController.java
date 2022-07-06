@@ -38,6 +38,14 @@ public class NBPController {
 
     }
 
+    @GetMapping("/information")
+    public ResponseEntity<String> getInformationAboutMainExchangeRates() {
+        String information= "Euro: " + nbpClient.getExchangeRateOf("eur").getRatesMid()+"\n"+
+                "USD: "+ nbpClient.getExchangeRateOf("usd").getRatesMid()+"\n"+
+                "CHF: "+ nbpClient.getExchangeRateOf("chf").getRatesMid();
+        return ResponseEntity.ok(information);
+    }
+
 
 
 }

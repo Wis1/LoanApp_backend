@@ -15,5 +15,5 @@ public class ExchangeRateDto {
     private String currency;
 
     @JsonProperty("rates")
-    private List ratesMid;
+    private List<RatesDto> ratesMid;
 }

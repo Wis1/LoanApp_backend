@@ -21,6 +21,12 @@ public class CalcApiController {
     private final CalcClient calcClient;
     private final CalculateDbService calculateDbService;
 
+    @GetMapping("/{amountLoan}/{loanLength}")
+    public ResponseEntity<String> getCalcResult(@PathVariable Integer amountLoan, @PathVariable Integer loanLength) throws IOException,InterruptedException {
+        CalcResultDto calcResultDto= calcClient.getCalcResult(amountLoan,loanLength);
+        return ResponseEntity.ok(calcResultDto.toString());
+    }
+
     @GetMapping(value = "{calculateId}")
     public ResponseEntity<CalcResultDto> getCalcResultToCalculate(@PathVariable Long calculateId) throws IOException, InterruptedException, CalculateNotFoundException {
         Calculate calculate= calculateDbService.getCalculateById(calculateId);
