@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+
 @Component
 @RequiredArgsConstructor
 public class NbpClient {
@@ -19,15 +20,11 @@ public class NbpClient {
 
     public ExchangeRateDto getExchangeRateOf(String currency) {
 
-        URI url= UriComponentsBuilder.fromHttpUrl(nbpEndpoint)
+        URI url = UriComponentsBuilder.fromHttpUrl(nbpEndpoint)
                 .path("/c/")
                 .path(currency)
                 .path("/last")
                 .build().encode().toUri();
-        ExchangeRateDto response= restTemplate.getForObject(url, ExchangeRateDto.class);
-
-        return response;
-
+        return restTemplate.getForObject(url, ExchangeRateDto.class);
     }
-
 }

@@ -24,13 +24,17 @@ public class Calculate {
     @Column
     private Integer loanLength;
 
+    @Column
+    private String calculate;
+
     @ManyToOne
     @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
-    public Calculate(Long id, Integer amountLoan, Integer loanLength) {
+    public Calculate(Long id, Integer amountLoan, Integer loanLength, String calculate) {
         this.id = id;
         this.amountLoan = amountLoan;
         this.loanLength = loanLength;
+        this.calculate= calculate;
     }
 }

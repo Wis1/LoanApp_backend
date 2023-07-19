@@ -26,7 +26,7 @@ public class CalculateRepositoryTest {
     public void addNewCalculate() {
 
         //Given
-        Calculate calculate= new Calculate(5L, 34000,235);
+        Calculate calculate= new Calculate(5L, 34000,235, "");
 
         //When
         calculateRepository.save(calculate);
@@ -44,8 +44,8 @@ public class CalculateRepositoryTest {
         //Given
         Client client= new Client("Tester", "testing");
 
-        Calculate calculate1= new Calculate(9L,30000,12,client);
-        Calculate calculate2= new Calculate(10L, 80000, 36, client);
+        Calculate calculate1= new Calculate(9L,30000,12,client.toString());
+        Calculate calculate2= new Calculate(10L, 80000, 36, client.toString());
 
         //When
         clientRepository.save(client);
@@ -68,8 +68,8 @@ public class CalculateRepositoryTest {
         //Given
         Client client= new Client("Tester", "testing");
 
-        Calculate calculate1= new Calculate(9L,30000,12,client);
-        Calculate calculate2= new Calculate(10L, 80000, 36, client);
+        Calculate calculate1= new Calculate(9L,30000,12,client.toString());
+        Calculate calculate2= new Calculate(10L, 80000, 36, client.toString());
 
         //When
         clientRepository.save(client);
@@ -77,6 +77,7 @@ public class CalculateRepositoryTest {
         calculateRepository.save(calculate1);
         calculateRepository.save(calculate2);
 
+        //Then
         List<Calculate> calculateListOfClient= calculateRepository.findByClient(client);
         assertEquals(2, calculateListOfClient.size());
 

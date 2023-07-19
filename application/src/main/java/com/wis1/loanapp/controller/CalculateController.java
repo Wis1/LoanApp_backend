@@ -47,7 +47,6 @@ public class CalculateController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "{clientId}")
     public ResponseEntity<Void> addNewCalculate(@RequestBody CalculateDto calculateDto, @PathVariable Long clientId) throws ClientNotFoundException {
 
-
         Calculate calculate=calculateMapper.mapToCalculate(calculateDto);
         calculate.setClient(clientDbService.getClientWithId(clientId));
         calculateDbService.saveCalculate(calculate);
@@ -66,6 +65,4 @@ public class CalculateController {
         Calculate savedCalculate= calculateDbService.saveCalculate(calculate);
         return ResponseEntity.ok(calculateMapper.mapToCalculateDto(savedCalculate));
     }
-
-
 }

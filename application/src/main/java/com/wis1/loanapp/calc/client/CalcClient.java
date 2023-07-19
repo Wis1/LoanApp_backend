@@ -23,22 +23,25 @@ public class CalcClient {
     @Value("${calc.api.endpoint.prod}")
     private String calApiEndpoint;
 
-    public CalcResultDto getCalcResult(Integer amount, Integer installments) throws IOException, InterruptedException {
+    @Value("${X-RapidAPI-Key}")
+    private String rapidApiKey;
+
+    @Value("${X-RapidAPI-Host}")
+    private String rapidApiHost;
+
+    public String getCalcResult(Integer amount, Integer installments) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(UriComponentsBuilder.fromHttpUrl(calApiEndpoint)
-                        .queryParam("amount", amount)
-                        .queryParam("installments", installments)
-                        .queryParam("interest_rate", 8)
-                        .queryParam("diminishing", false).build().encode().toString()))
-                .header("X-RapidAPI-Key", "a5031c4912mshe2b2222390a030ap13bb3cjsn29ea85b82148")
-                .header("X-RapidAPI-Host", "loan-generator1.p.rapidapi.com")
+                        .queryParam("loan", amount)
+                        .queryParam("rate", 8)
+                        .queryParam("term", installments)
+                        .queryParam("currency", "USD").build().encode().toString()))
+                .header("X-RapidAPI-Key", rapidApiKey)
+                .header("X-RapidAPI-Host", rapidApiHost)
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        Gson gson= new Gson();
-        CalcResultDto calcResultDto= gson.fromJson(response.body(), CalcResultDto.class);
-        return calcResultDto;
-
+        return response.body();
     }
 }
