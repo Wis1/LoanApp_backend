@@ -24,14 +24,15 @@ public class Calculate {
     @Column
     private Integer loanLength;
 
-    @Column
-    private String calculate;
-
     @ManyToOne
     @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
-    public Calculate(Long id, Integer amountLoan, Integer loanLength, String calculate) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "calcresult_id", referencedColumnName = "id")
+    private CalcResult calculate;
+
+    public Calculate(Long id, Integer amountLoan, Integer loanLength, CalcResult calculate) {
         this.id = id;
         this.amountLoan = amountLoan;
         this.loanLength = loanLength;

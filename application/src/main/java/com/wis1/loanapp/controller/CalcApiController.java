@@ -22,18 +22,18 @@ public class CalcApiController {
     private final CalculateDbService calculateDbService;
 
     @GetMapping("/{amountLoan}/{loanLength}")
-    public ResponseEntity<String> getCalcResult(@PathVariable Integer amountLoan, @PathVariable Integer loanLength) throws IOException,InterruptedException {
-        String calcResultDto= calcClient.getCalcResult(amountLoan,loanLength);
+    public ResponseEntity<CalcResultDto> getCalcResult(@PathVariable Integer amountLoan, @PathVariable Integer loanLength) throws IOException,InterruptedException {
+        CalcResultDto calcResultDto= calcClient.getCalcResult(amountLoan,loanLength);
         return ResponseEntity.ok(calcResultDto);
     }
 
     @GetMapping(value = "{calculateId}")
-    public ResponseEntity<String> getCalcResultToCalculate(@PathVariable Long calculateId) throws IOException, InterruptedException, CalculateNotFoundException {
+    public ResponseEntity<CalcResultDto> getCalcResultToCalculate(@PathVariable Long calculateId) throws IOException, InterruptedException, CalculateNotFoundException {
         Calculate calculate= calculateDbService.getCalculateById(calculateId);
         Integer amount= calculate.getAmountLoan();
         Integer installments= calculate.getLoanLength();
 
-        String calcResultDto= calcClient.getCalcResult(amount, installments);
+        CalcResultDto calcResultDto= calcClient.getCalcResult(amount, installments);
         return ResponseEntity.ok(calcResultDto);
     }
 }

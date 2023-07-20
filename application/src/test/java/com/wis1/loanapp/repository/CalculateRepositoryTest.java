@@ -1,5 +1,6 @@
 package com.wis1.loanapp.repository;
 
+import com.wis1.loanapp.domain.CalcResult;
 import com.wis1.loanapp.domain.Calculate;
 import com.wis1.loanapp.domain.Client;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class CalculateRepositoryTest {
     public void addNewCalculate() {
 
         //Given
-        Calculate calculate= new Calculate(5L, 34000,235, "");
+        Calculate calculate= new Calculate(5L, 34000,235, new CalcResult());
 
         //When
         calculateRepository.save(calculate);
@@ -44,8 +45,8 @@ public class CalculateRepositoryTest {
         //Given
         Client client= new Client("Tester", "testing");
 
-        Calculate calculate1= new Calculate(9L,30000,12,client.toString());
-        Calculate calculate2= new Calculate(10L, 80000, 36, client.toString());
+        Calculate calculate1= new Calculate(9L,30000,12, new CalcResult());
+        Calculate calculate2= new Calculate(10L, 80000, 36, new CalcResult());
 
         //When
         clientRepository.save(client);
@@ -68,8 +69,8 @@ public class CalculateRepositoryTest {
         //Given
         Client client= new Client("Tester", "testing");
 
-        Calculate calculate1= new Calculate(9L,30000,12,client.toString());
-        Calculate calculate2= new Calculate(10L, 80000, 36, client.toString());
+        Calculate calculate1= new Calculate(9L,30000,12, new CalcResult());
+        Calculate calculate2= new Calculate(10L, 80000, 36, new CalcResult());
 
         //When
         clientRepository.save(client);

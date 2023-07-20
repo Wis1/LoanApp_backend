@@ -1,5 +1,6 @@
 package com.wis1.loanapp.calc.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.wis1.loanapp.dto.CalcResultDto;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class CalcClient {
     @Value("${X-RapidAPI-Host}")
     private String rapidApiHost;
 
-    public String getCalcResult(Integer amount, Integer installments) throws IOException, InterruptedException {
+    public CalcResultDto getCalcResult(Integer amount, Integer installments) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(UriComponentsBuilder.fromHttpUrl(calApiEndpoint)
@@ -42,6 +43,8 @@ public class CalcClient {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        return response.body();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(response.body(), CalcResultDto.class);
     }
 }
