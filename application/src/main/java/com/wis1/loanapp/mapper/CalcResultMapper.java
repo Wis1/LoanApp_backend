@@ -2,13 +2,17 @@ package com.wis1.loanapp.mapper;
 
 import com.wis1.loanapp.domain.CalcResult;
 import com.wis1.loanapp.dto.CalcResultDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CalcResultMapper {
+
+    private final ScheduleItemMapper scheduleItemMapper;
 
     public CalcResult mapToCalcResul(final CalcResultDto calcResultDto) {
         return new CalcResult(
@@ -18,7 +22,7 @@ public class CalcResultMapper {
                 calcResultDto.getLoan_type(),
                 calcResultDto.getMonthly_payment(),
                 calcResultDto.getRepayment_term(),
-                calcResultDto.getSchedule()
+                scheduleItemMapper.mapToScheduleItemList(calcResultDto.getSchedule())
         );
     }
 
@@ -30,7 +34,7 @@ public class CalcResultMapper {
                 calcResult.getLoan_type(),
                 calcResult.getMonthly_payment(),
                 calcResult.getRepayment_term(),
-                calcResult.getSchedule()
+                scheduleItemMapper.mapToScheduleItemDtoList(calcResult.getSchedule())
         );
     }
 

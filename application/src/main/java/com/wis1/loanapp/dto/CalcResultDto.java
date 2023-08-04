@@ -1,6 +1,5 @@
 package com.wis1.loanapp.dto;
 
-import com.wis1.loanapp.domain.ScheduleItem;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +18,5 @@ public class CalcResultDto {
     private String loan_type;
     private String monthly_payment;
     private String repayment_term;
-    private List<ScheduleItem> schedule;
+    private List<ScheduleItemDto> schedule;
 }
