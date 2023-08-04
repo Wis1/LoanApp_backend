@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.wis1.loanapp.domain.CalcResult;
 import com.wis1.loanapp.domain.Calculate;
 import com.wis1.loanapp.domain.Client;
+import com.wis1.loanapp.dto.CalcResultDto;
 import com.wis1.loanapp.dto.CalculateDto;
 import com.wis1.loanapp.mapper.CalculateMapper;
 import com.wis1.loanapp.service.CalculateDbService;
@@ -46,7 +47,7 @@ public class CalculateControllerTest {
 
         //Given
         List<Calculate> calculateList= List.of(new Calculate(2L, 20000, 48, new CalcResult()));
-        List<CalculateDto> calculateDtoList= List.of(new CalculateDto(2L,20000,48, new CalcResult()));
+        List<CalculateDto> calculateDtoList= List.of(new CalculateDto(2L,20000,48, new CalcResultDto()));
         when(calculateDbService.getAllCalculate()).thenReturn(calculateList);
         when(calculateMapper.mapToCalculateDtoList(calculateList)).thenReturn(calculateDtoList);
 
@@ -66,7 +67,7 @@ public class CalculateControllerTest {
     void shouldGetCalculateWithId() throws Exception {
 
         //Given
-        CalculateDto calculateDto= new CalculateDto(3L, 40000, 60, new CalcResult());
+        CalculateDto calculateDto= new CalculateDto(3L, 40000, 60, new CalcResultDto());
         Calculate calculate= new Calculate(3L, 40000, 60, new CalcResult());
 
 
@@ -89,7 +90,7 @@ public class CalculateControllerTest {
     void shouldCreateCalculate() throws Exception {
 
         //Given
-        CalculateDto newCalculateDto= new CalculateDto(4L, 78000, 78, new CalcResult());
+        CalculateDto newCalculateDto= new CalculateDto(4L, 78000, 78, new CalcResultDto());
         Calculate newCalculate= new Calculate(4L, 78000, 78, new CalcResult());
         Client client= new Client(7L,"Paul", "Test");
 
@@ -115,7 +116,7 @@ public class CalculateControllerTest {
     void shouldDeleteCalculate() throws Exception {
 
         //Given
-        CalculateDto calculateDto= new CalculateDto(5L, 56000,34, new CalcResult());
+        CalculateDto calculateDto= new CalculateDto(5L, 56000,34, new CalcResultDto());
         Calculate calculate= new Calculate(5L, 56000,34, new CalcResult());
 
         //When & Then
@@ -130,10 +131,10 @@ public class CalculateControllerTest {
     void shouldUpdateCalculate() throws Exception {
 
         //Given
-        CalculateDto calculateDto= new CalculateDto(7L, 47000,24, new CalcResult());
+        CalculateDto calculateDto= new CalculateDto(7L, 47000,24, new CalcResultDto());
         Calculate calculate= new Calculate(7L, 47000, 24, new CalcResult());
         Calculate updateCalculate= new Calculate(8L, 100000, 240, new CalcResult());
-        CalculateDto updateCalculateDto= new CalculateDto(8L,100000, 240, new CalcResult());
+        CalculateDto updateCalculateDto= new CalculateDto(8L,100000, 240, new CalcResultDto());
 
         when(calculateMapper.mapToCalculate(any(CalculateDto.class))).thenReturn(calculate);
         when(calculateDbService.saveCalculate(any(Calculate.class))).thenReturn(updateCalculate);

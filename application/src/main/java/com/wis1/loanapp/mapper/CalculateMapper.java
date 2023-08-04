@@ -2,20 +2,23 @@ package com.wis1.loanapp.mapper;
 
 import com.wis1.loanapp.domain.Calculate;
 import com.wis1.loanapp.dto.CalculateDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CalculateMapper {
+    private final CalcResultMapper calcResultMapper;
 
     public Calculate mapToCalculate(final CalculateDto calculateDto) {
         return new Calculate(
                 calculateDto.getId(),
                 calculateDto.getAmountLoan(),
                 calculateDto.getLoanLength(),
-                calculateDto.getCalculate()
+                calcResultMapper.mapToCalcResul(calculateDto.getCalculate())
         );
     }
 
@@ -24,7 +27,7 @@ public class CalculateMapper {
                 calculate.getId(),
                 calculate.getAmountLoan(),
                 calculate.getLoanLength(),
-                calculate.getCalculate()
+                calcResultMapper.mapToCalcResultDto(calculate.getCalculate())
         );
     }
 

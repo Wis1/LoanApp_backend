@@ -50,7 +50,6 @@ public class CalculateRepositoryTest {
 
         //When
         clientRepository.save(client);
-
         calculateRepository.save(calculate1);
         calculateRepository.save(calculate2);
 
