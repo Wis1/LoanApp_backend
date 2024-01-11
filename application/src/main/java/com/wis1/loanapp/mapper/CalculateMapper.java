@@ -15,10 +15,9 @@ public class CalculateMapper {
 
     public Calculate mapToCalculate(final CalculateDto calculateDto) {
         return new Calculate(
-                calculateDto.getId(),
                 calculateDto.getAmountLoan(),
                 calculateDto.getLoanLength(),
-                calcResultMapper.mapToCalcResul(calculateDto.getCalculate())
+                calcResultMapper.mapToCalcResult(calculateDto.getCalculate())
         );
     }
 
@@ -27,7 +26,7 @@ public class CalculateMapper {
                 calculate.getId(),
                 calculate.getAmountLoan(),
                 calculate.getLoanLength(),
-                calcResultMapper.mapToCalcResultDto(calculate.getCalculate())
+                calcResultMapper.mapToCalcResultDto(calculate.getCalcResult())
         );
     }
 

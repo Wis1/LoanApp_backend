@@ -14,7 +14,7 @@ public class CalcResultMapper {
 
     private final ScheduleItemMapper scheduleItemMapper;
 
-    public CalcResult mapToCalcResul(final CalcResultDto calcResultDto) {
+    public CalcResult mapToCalcResult(final CalcResultDto calcResultDto) {
         return new CalcResult(
                 calcResultDto.getInterest_rate(),
                 calcResultDto.getLoan_interest(),
@@ -28,6 +28,7 @@ public class CalcResultMapper {
 
     public CalcResultDto mapToCalcResultDto(final CalcResult calcResult) {
         return new CalcResultDto(
+                calcResult.getId(),
                 calcResult.getInterest_rate(),
                 calcResult.getLoan_interest(),
                 calcResult.getLoan_amount(),

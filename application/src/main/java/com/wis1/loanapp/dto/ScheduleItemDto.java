@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ScheduleItemDto {
+
+    private Long id;
     private String balance;
     private String interest;
     private String payment;

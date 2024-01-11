@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
+
         @ExceptionHandler(ClientNotFoundException.class)
         public ResponseEntity<Object> handleClientNotFoundException(ClientNotFoundException exception) {
             return  new ResponseEntity<>("Client with given id doesn't exist", HttpStatus.BAD_REQUEST);

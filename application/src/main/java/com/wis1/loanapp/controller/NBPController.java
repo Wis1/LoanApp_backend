@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/v1/nbp/")
 @RequiredArgsConstructor
@@ -21,21 +20,16 @@ public class NBPController {
         return ResponseEntity.ok(exchangeRateDto);
     }
 
-
     @GetMapping("/eur/{eur}")
     public ResponseEntity<ExchangeRateDto> getEuroRate(@PathVariable String eur){
-
         ExchangeRateDto exchangeRateDto=nbpClient.getExchangeRateOf(eur);
         return ResponseEntity.ok(exchangeRateDto);
-
     }
 
     @GetMapping("/chf/{chf}")
     public ResponseEntity<ExchangeRateDto> getFrankRate(@PathVariable String chf ){
-
         ExchangeRateDto exchangeRateDto= nbpClient.getExchangeRateOf(chf);
         return ResponseEntity.ok(exchangeRateDto);
-
     }
 
     @GetMapping("/information")
@@ -45,7 +39,4 @@ public class NBPController {
                             "CHF: " + nbpClient.getExchangeRateOf("chf").getRatesMid().get(0).getValue();
         return ResponseEntity.ok(information);
     }
-
-
-
 }

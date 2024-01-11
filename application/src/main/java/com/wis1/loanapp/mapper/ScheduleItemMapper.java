@@ -22,6 +22,7 @@ public class ScheduleItemMapper {
 
     public ScheduleItemDto mapToScheduleItemDto(final ScheduleItem scheduleItem) {
         return new ScheduleItemDto(
+                scheduleItem.getId(),
                 scheduleItem.getBalance(),
                 scheduleItem.getInterest(),
                 scheduleItem.getPayment(),

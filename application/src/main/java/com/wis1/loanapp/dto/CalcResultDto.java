@@ -12,6 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 public class CalcResultDto {
+
+    private Long id;
     private String interest_rate;
     private String loan_amount;
     private String loan_interest;

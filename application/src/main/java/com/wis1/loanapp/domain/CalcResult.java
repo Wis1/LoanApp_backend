@@ -17,7 +17,7 @@ import java.util.List;
 public class CalcResult {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -38,14 +38,28 @@ public class CalcResult {
     @Column
     private String repayment_term;
 
-    @OneToMany(targetEntity = ScheduleItem.class,
-            mappedBy = "calcResult",
+    @OneToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    private List<com.wis1.loanapp.domain.ScheduleItem> schedule = new ArrayList<>();
-
-    @OneToOne
+            fetch = FetchType.LAZY,
+            mappedBy = "calcResult"
+    )
     private Calculate calculate;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "calcResult",
+            orphanRemoval = true)
+    private List<ScheduleItem> schedule = new ArrayList<>();
+
+    public void addScheduleItem(ScheduleItem scheduleItem) {
+        this.schedule.add(scheduleItem);
+        scheduleItem.setCalcResult(this);
+    }
+
+    public void removeScheduleItem(ScheduleItem scheduleItem) {
+        schedule.remove(scheduleItem);
+        scheduleItem.setCalcResult(null);
+    }
 
     public CalcResult(String interest_rate,
                       String loan_amount,

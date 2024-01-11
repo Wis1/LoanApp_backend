@@ -21,33 +21,25 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<List<ClientDto>> getAllClients(){
-
         List<Client> clientDtoList= clientDbService.getAllClients();
         return ResponseEntity.ok(clientMapper.mapToClientDtoList(clientDtoList));
-
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addClient(@RequestBody ClientDto clientDto){
-
         clientDbService.saveClient(clientMapper.mapToClient(clientDto));
         return ResponseEntity.ok().build();
-
     }
 
     @PutMapping
     public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto){
-
         Client updateClient= clientDbService.saveClient(clientMapper.mapToClient(clientDto));
         return ResponseEntity.ok(clientMapper.mapToClientDto(updateClient));
-
     }
 
     @DeleteMapping(path = "{clientId}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long clientId) {
-
         clientDbService.deleteClient(clientId);
         return ResponseEntity.ok().build();
     }
-
 }

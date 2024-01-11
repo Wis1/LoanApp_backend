@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Calculate {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -28,14 +28,13 @@ public class Calculate {
     @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "calcresult_id", referencedColumnName = "id")
-    private CalcResult calculate;
+    private CalcResult calcResult;
 
-    public Calculate(Long id, Integer amountLoan, Integer loanLength, CalcResult calculate) {
-        this.id = id;
+    public Calculate(Integer amountLoan, Integer loanLength, CalcResult calcResult) {
         this.amountLoan = amountLoan;
         this.loanLength = loanLength;
-        this.calculate= calculate;
+        this.calcResult = calcResult;
     }
 }

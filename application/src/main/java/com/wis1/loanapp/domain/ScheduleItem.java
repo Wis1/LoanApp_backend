@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "schedule_item")
 @AllArgsConstructor
@@ -16,7 +17,7 @@ public
 class ScheduleItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -34,10 +35,27 @@ class ScheduleItem {
     @Column
     private String principal;
 
-    @ManyToOne
-    @JoinColumn(name = "CALCRESULT_ID")
+    @ManyToOne()
     private CalcResult calcResult;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ScheduleItem that = (ScheduleItem) o;
+        return Objects.equals(id, that.id) && Objects.equals(calcResult, that.calcResult);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, calcResult);
+    }
+
     public ScheduleItem(String balance, String interest, String payment, String principal, int period) {
+        this.balance= balance;
+        this.interest= interest;
+        this.payment= payment;
+        this.principal= principal;
+        this.period= period;
     }
 }
